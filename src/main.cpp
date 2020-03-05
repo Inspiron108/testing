@@ -70,12 +70,12 @@ void opcontrol() {
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 pros::Motor L1(19);
 pros::Motor L2(20);
-pros::Motor R1(12,true);
-pros::Motor R2(11,true);
+pros::Motor R1(12,1);
+pros::Motor R2(11,1);
 pros::Motor Tray(5);
 pros::Motor I1(2);
-pros::Motor I2(3,true);
-pros::Motor Arm(6,true);
+pros::Motor I2(3,1);
+pros::Motor Arm(6,1);
 	while (true) {
 
 //tray
@@ -93,6 +93,7 @@ pros::Motor Arm(6,true);
 				}
 				else
 				{
+				Tray.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 				Tray.move_velocity(0);
 				}
 		}
@@ -111,6 +112,7 @@ pros::Motor Arm(6,true);
 		}
 		else
 		{
+		Arm.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 		Arm.move_velocity(0);
 		}
 	}
@@ -118,17 +120,19 @@ pros::Motor Arm(6,true);
 //Intakes
 	if(master.get_digital(DIGITAL_R1) == 1)
 	{
-		I1.move_voltage(12000);
-		I2.move_voltage(12000);
+		I1.move_velocity(12000);
+		I2.move_velocity(12000);
 	}
 	else
 	{
-		if(master.get_digital(DIGITAL_DOWN) == 1){
+		if(master.get_digital(DIGITAL_R2) == 1){
 			I1.move_voltage(-12000);
-			I2.move_voltage(12000);
+			I2.move_voltage(-12000);
 		}
 		else
 		{
+		//I1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+		//I2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 		I1.move_velocity(0);
 		I2.move_velocity(0);
 		}
@@ -138,8 +142,8 @@ pros::Motor Arm(6,true);
 		int s = master.get_analog(ANALOG_RIGHT_X);
 		int t = master.get_analog(ANALOG_LEFT_X);
 		int f = master.get_analog(ANALOG_RIGHT_Y);
-		R1 = -f + t - s;
-		R2 = -f - t + s;
+		R1 = f - t - s;
+		R2 = f - t + s;
 		L1 = f + t + s;
 		L2 = f + t - s;
 
@@ -149,8 +153,8 @@ pros::Motor Arm(6,true);
 //Intake Breaking
 		if(I1.get_target_velocity() == 0)
 		{
-			I1.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-			I2.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+			I1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+			I2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 		}
 	}
 }
