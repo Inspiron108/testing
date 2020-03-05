@@ -25,6 +25,7 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {
+
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	pros::Motor left_mtr(1);
 	pros::Motor right_mtr(2);
@@ -42,6 +43,7 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
 void autonomous() {
 
 
@@ -152,3 +154,34 @@ pros::Motor Arm(6,true);
 		}
 	}
 }
+
+// Blakes vscode
+//
+ void mainb () {
+	 pros::Controller master(pros::E_CONTROLLER_MASTER);
+	 pros::Motor L1(19);
+	 pros::Motor L2(20);
+	 pros::Motor R1(12,true);
+	 pros::Motor R2(11,true);
+	 pros::Motor Tray(5);
+	 pros::Motor I1(2);
+	 pros::Motor I2(3,true);
+	 pros::Motor Arm(6,true);
+
+
+int x = master.get_analog(ANALOG_RIGHT_Y)	;
+
+ //experminetal = (12/10)(1.043)x ^- 1.2 + 0.2x;
+
+
+
+	L1 = master.get_analog(ANALOG_RIGHT_Y)^(12/10);
+
+
+// printf(L1);
+
+
+
+
+
+ }
