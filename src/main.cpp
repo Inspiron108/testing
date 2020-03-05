@@ -66,11 +66,11 @@ void autonomous() {
  */
 void opcontrol() {
 pros::Controller master(pros::E_CONTROLLER_MASTER);
-pros::Motor L1_mtr(19);
-pros::Motor L2_mtr(20);
-pros::Motor R1_mtr(12);
-pros::Motor R2_mtr(11);
-pros::Motor Tray_mtr(5);
+pros::Motor L1(19);
+pros::Motor L2(20);
+pros::Motor R1(12);
+pros::Motor R2(11);
+pros::Motor Tray(5);
 
 
 int intakes = 0;
@@ -81,9 +81,9 @@ int intakes = 0;
 
 		if(master.get_digital(DIGITAL_UP) == 1)
 		{
-
-
+			Tray.move_voltage(12000);
 		}
+		
 
 
 
@@ -93,10 +93,10 @@ int intakes = 0;
 		int f = master.get_analog(ANALOG_RIGHT_Y);
 
 
-		R1_mtr = f + t - s;
-		R2_mtr = f - t + s;
-		L1_mtr = f + t + s;
-		L2_mtr = f + t - s;
+		R1 = f + t - s;
+		R2 = f - t + s;
+		L1 = f + t + s;
+		L2 = f + t - s;
 
 
 		pros::delay(20);
