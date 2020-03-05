@@ -82,8 +82,10 @@ int intakes = 0;
 		if(master.get_digital(DIGITAL_UP) == 1)
 		{
 			Tray.move_voltage(12000);
+			
 		}
-		
+
+
 
 
 
