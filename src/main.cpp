@@ -74,11 +74,6 @@ pros::Motor Tray(5);
 pros::Motor I1(2);
 pros::Motor I2(3,true);
 pros::Motor Arm(6,true);
-
-int intakes = 0;
-
-
-
 	while (true) {
 
 //tray
@@ -137,18 +132,15 @@ int intakes = 0;
 		}
 	}
 
-
-
-
+//Drive
 		int s = master.get_analog(ANALOG_RIGHT_X);
 		int t = master.get_analog(ANALOG_LEFT_X);
 		int f = master.get_analog(ANALOG_RIGHT_Y);
-
-
 		R1 = -f + t - s;
 		R2 = -f - t + s;
 		L1 = f + t + s;
 		L2 = f + t - s;
+
 
 		pros::delay(20);
 
@@ -158,8 +150,5 @@ int intakes = 0;
 			I1.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 			I2.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 		}
-
-
-
 	}
 }
